@@ -1,0 +1,19 @@
+name: Feature request
+description: Something the tool could do within its scope.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The scope is business-day and deadline arithmetic for Australian states and territories, offline. Hours, time zones, New Zealand and bank-day calendars are out of scope for now.
+  - type: textarea
+    id: what
+    attributes:
+      label: What do you want to be able to do?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Where would the data come from?
+      description: If it needs holidays or rules the package does not have, link the official source.

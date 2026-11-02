@@ -1,0 +1,19 @@
+{
+  "state": "TAS",
+  "year": 2028,
+  "source_url": "https://www.worksafe.tas.gov.au/topics/laws-and-compliance/public-holidays",
+  "retrieved_on": "2026-11-02",
+  "holidays": [
+    {"date":"2028-01-01","name":"New Year's Day","scope":"statewide","status":"confirmed"},
+    {"date":"2028-01-03","name":"New Year's Day (additional day)","scope":"statewide","status":"estimated","note":"The table lists 1 January only. The Monday comes from the page's own rule that a weekend New Year's Day moves to the following Monday."},
+    {"date":"2028-01-26","name":"Australia Day","scope":"statewide","status":"confirmed"},
+    {"date":"2028-03-13","name":"Eight Hours Day","scope":"statewide","status":"confirmed"},
+    {"date":"2028-04-14","name":"Good Friday","scope":"statewide","status":"confirmed"},
+    {"date":"2028-04-16","name":"Easter Sunday","scope":"statewide","status":"confirmed"},
+    {"date":"2028-04-17","name":"Easter Monday","scope":"statewide","status":"confirmed"},
+    {"date":"2028-04-25","name":"Anzac Day","scope":"statewide","status":"confirmed"},
+    {"date":"2028-06-12","name":"King's Birthday","scope":"statewide","status":"confirmed"},
+    {"date":"2028-12-25","name":"Christmas Day","scope":"statewide","status":"confirmed"},
+    {"date":"2028-12-26","name":"Boxing Day","scope":"statewide","status":"confirmed"}
+  ]
+}

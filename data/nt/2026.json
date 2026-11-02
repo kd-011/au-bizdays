@@ -1,0 +1,23 @@
+{
+  "state": "NT",
+  "year": 2026,
+  "source_url": "https://nt.gov.au/employ/for-employees-in-nt/nt-public-holidays",
+  "retrieved_on": "2026-11-02",
+  "holidays": [
+    {"date":"2026-01-01","name":"New Year's Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-01-26","name":"Australia Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-04-03","name":"Good Friday","scope":"statewide","status":"confirmed"},
+    {"date":"2026-04-04","name":"Easter Saturday","scope":"statewide","status":"confirmed"},
+    {"date":"2026-04-05","name":"Easter Sunday","scope":"statewide","status":"confirmed"},
+    {"date":"2026-04-06","name":"Easter Monday","scope":"statewide","status":"confirmed"},
+    {"date":"2026-04-25","name":"Anzac Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-05-04","name":"May Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-06-08","name":"King's Birthday","scope":"statewide","status":"confirmed"},
+    {"date":"2026-08-03","name":"Picnic Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-12-24","name":"Christmas Eve","scope":"part-day","status":"confirmed","note":"7pm to midnight"},
+    {"date":"2026-12-25","name":"Christmas Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-12-26","name":"Boxing Day","scope":"statewide","status":"confirmed"},
+    {"date":"2026-12-28","name":"Boxing Day (additional day)","scope":"statewide","status":"confirmed"},
+    {"date":"2026-12-31","name":"New Year's Eve","scope":"part-day","status":"confirmed","note":"7pm to midnight"}
+  ]
+}

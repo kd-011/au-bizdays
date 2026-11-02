@@ -1,0 +1,53 @@
+# Monthly: re-read each state's official page and open a pull request if the bundled data
+# should change. This workflow never pushes to the default branch. It pushes a branch and opens
+# a pull request, and a person reads the diff before it merges.
+#
+# Needs "Allow GitHub Actions to create and approve pull requests" in the repository's
+# Actions settings. A pull request opened with the built-in token does not start the ci
+# workflow by itself; push an empty commit to the branch or close and reopen it.
+#
+# The VIC, NT, TAS and SA sites answer scripts with a bot challenge, so those four show up as
+# "NOT VERIFIED" in the report. See the README.
+name: refresh-holidays
+on:
+  schedule:
+    - cron: '17 3 1 * *'
+  workflow_dispatch:
+permissions: {}
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Refresh the data
+        id: refresh
+        run: |
+          set +e
+          node scripts/refresh-holidays.mjs --write --allow-blocked --report "$RUNNER_TEMP/refresh-report.md"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/refresh-report.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Open a pull request if the data changed
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ${{ github.event.repository.default_branch }}
+          branch: refresh-holidays
+          add-paths: data
+          commit-message: Refresh holiday data from official sources
+          title: Refresh holiday data from official sources
+          body-path: ${{ runner.temp }}/refresh-report.md
+          delete-branch: true
+      - name: Fail if a page could not be parsed
+        if: steps.refresh.outputs.code != '0'
+        run: |
+          echo "refresh-holidays exited with ${{ steps.refresh.outputs.code }}; see the report in the job summary"
+          exit 1

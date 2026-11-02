@@ -1,0 +1,20 @@
+{
+  "state": "QLD",
+  "year": 2025,
+  "source_url": "https://www.qld.gov.au/recreation/travel/holidays/queensland-public-holiday-dates-for-2025",
+  "retrieved_on": "2026-11-02",
+  "holidays": [
+    {"date":"2025-01-01","name":"New Year's Day","scope":"statewide","status":"confirmed"},
+    {"date":"2025-01-27","name":"Australia Day","scope":"statewide","status":"confirmed"},
+    {"date":"2025-04-18","name":"Good Friday","scope":"statewide","status":"confirmed"},
+    {"date":"2025-04-19","name":"Easter Saturday","scope":"statewide","status":"confirmed"},
+    {"date":"2025-04-20","name":"Easter Sunday","scope":"statewide","status":"confirmed"},
+    {"date":"2025-04-21","name":"Easter Monday","scope":"statewide","status":"confirmed"},
+    {"date":"2025-04-25","name":"Anzac Day","scope":"statewide","status":"confirmed"},
+    {"date":"2025-05-05","name":"Labour Day","scope":"statewide","status":"confirmed"},
+    {"date":"2025-10-06","name":"King's Birthday","scope":"statewide","status":"confirmed"},
+    {"date":"2025-12-24","name":"Christmas Eve","scope":"part-day","status":"confirmed","note":"6pm to midnight"},
+    {"date":"2025-12-25","name":"Christmas Day","scope":"statewide","status":"confirmed"},
+    {"date":"2025-12-26","name":"Boxing Day","scope":"statewide","status":"confirmed"}
+  ]
+}

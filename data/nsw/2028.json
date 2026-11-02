@@ -1,0 +1,21 @@
+{
+  "state": "NSW",
+  "year": 2028,
+  "source_url": "https://www.nsw.gov.au/about-nsw/public-holidays",
+  "retrieved_on": "2026-11-02",
+  "estimate_basis": "The NSW page publishes 2026 and 2027 only. These dates follow the pattern of NSW dates published for 2025 to 2027 (King's Birthday on the second Monday in June, Labour Day on the first Monday in October, Anzac Day on 25 April, an additional day after a weekend New Year's Day) and the Easter dates other states publish for 2028. They were not read from an NSW source.",
+  "holidays": [
+    {"date":"2028-01-01","name":"New Year's Day","scope":"statewide","status":"estimated"},
+    {"date":"2028-01-03","name":"New Year's Day (additional day)","scope":"statewide","status":"estimated"},
+    {"date":"2028-01-26","name":"Australia Day","scope":"statewide","status":"estimated"},
+    {"date":"2028-04-14","name":"Good Friday","scope":"statewide","status":"estimated"},
+    {"date":"2028-04-15","name":"Easter Saturday","scope":"statewide","status":"estimated"},
+    {"date":"2028-04-16","name":"Easter Sunday","scope":"statewide","status":"estimated"},
+    {"date":"2028-04-17","name":"Easter Monday","scope":"statewide","status":"estimated"},
+    {"date":"2028-04-25","name":"Anzac Day","scope":"statewide","status":"estimated"},
+    {"date":"2028-06-12","name":"King's Birthday","scope":"statewide","status":"estimated"},
+    {"date":"2028-10-02","name":"Labour Day","scope":"statewide","status":"estimated"},
+    {"date":"2028-12-25","name":"Christmas Day","scope":"statewide","status":"estimated"},
+    {"date":"2028-12-26","name":"Boxing Day","scope":"statewide","status":"estimated"}
+  ]
+}

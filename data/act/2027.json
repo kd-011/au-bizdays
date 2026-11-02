@@ -1,0 +1,24 @@
+{
+  "state": "ACT",
+  "year": 2027,
+  "source_url": "https://www.act.gov.au/living-in-the-act/public-holidays-school-terms-and-daylight-saving",
+  "retrieved_on": "2026-11-02",
+  "holidays": [
+    {"date":"2027-01-01","name":"New Year's Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-01-26","name":"Australia Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-03-08","name":"Canberra Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-03-26","name":"Good Friday","scope":"statewide","status":"confirmed"},
+    {"date":"2027-03-27","name":"Easter Saturday","scope":"statewide","status":"confirmed"},
+    {"date":"2027-03-28","name":"Easter Sunday","scope":"statewide","status":"confirmed"},
+    {"date":"2027-03-29","name":"Easter Monday","scope":"statewide","status":"confirmed"},
+    {"date":"2027-04-25","name":"Anzac Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-04-26","name":"Anzac Day (additional day)","scope":"statewide","status":"confirmed"},
+    {"date":"2027-05-31","name":"Reconciliation Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-06-14","name":"King's Birthday","scope":"statewide","status":"confirmed"},
+    {"date":"2027-10-04","name":"Labour Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-12-25","name":"Christmas Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-12-26","name":"Boxing Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-12-27","name":"Christmas Day (additional day)","scope":"statewide","status":"confirmed"},
+    {"date":"2027-12-28","name":"Boxing Day (additional day)","scope":"statewide","status":"confirmed"}
+  ]
+}

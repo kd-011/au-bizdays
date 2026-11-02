@@ -1,0 +1,65 @@
+{
+  "name": "au-bizdays",
+  "version": "0.1.0",
+  "description": "Business-day and deadline arithmetic for Australian states and territories, with per-state public holidays. A CLI and a read-only MCP server.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "australia",
+    "business-days",
+    "working-days",
+    "public-holidays",
+    "deadlines",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "kd-011",
+  "mcpName": "io.github.kd-011/au-bizdays",
+  "homepage": "https://github.com/kd-011/au-bizdays#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kd-011/au-bizdays.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kd-011/au-bizdays/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "au-bizdays": "dist/cli.js",
+    "au-bizdays-mcp": "dist/mcp.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "server.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node -e \"for (const f of ['dist/cli.js', 'dist/mcp.js']) require('fs').chmodSync(f, 0o755)\"",
+    "lint": "tsc -p tsconfig.json --noEmit && node scripts/check-text.mjs && node --check scripts/refresh-holidays.mjs && node --check scripts/lib/parse.mjs",
+    "check": "npm run lint && node scripts/render-demo.mjs --check",
+    "assets": "node scripts/render-demo.mjs",
+    "refresh": "node scripts/refresh-holidays.mjs --check",
+    "pretest": "npm run build",
+    "test": "node --test test/*.test.mjs",
+    "test:tz": "npm run build && TZ=Australia/Perth node --test test/*.test.mjs && TZ=America/Los_Angeles node --test test/*.test.mjs",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}
