@@ -35,9 +35,10 @@ export interface Envelope {
   caveats: string[];
 }
 
-/** Today as YYYY-MM-DD, passed in so the core never reads the clock. */
+/** The clock, passed in so the core never reads it. `todayIn` answers "today" for a state's own time zone. */
 export interface Context {
   today: string;
+  todayIn?: (state: State) => string;
 }
 
 // ---------------------------------------------------------------- input checks
@@ -49,10 +50,14 @@ export function parseState(v: unknown): State {
   return s as State;
 }
 
-function parseDate(v: unknown, label: string): Day {
-  if (v === undefined || v === null || v === '') throw new UsageError(`A ${label} is required, as YYYY-MM-DD.`);
-  const day = typeof v === 'string' ? parseDay(v) : null;
-  if (day === null) throw new UsageError(`Invalid ${label} "${String(v)}": dates are YYYY-MM-DD calendar dates, for example 2026-12-18.`);
+function parseDate(v: unknown, label: string, ctx: Context, state: State): Day {
+  if (v === undefined || v === null || v === '') throw new UsageError(`A ${label} is required, as YYYY-MM-DD or the word today.`);
+  let day: Day | null = null;
+  if (typeof v === 'string') {
+    // "today" is the calendar date on the state's own clock, so it does not depend on where this runs.
+    day = v.trim().toLowerCase() === 'today' ? parseDay(ctx.todayIn ? ctx.todayIn(state) : ctx.today) : parseDay(v);
+  }
+  if (day === null) throw new UsageError(`Invalid ${label} "${String(v)}": dates are YYYY-MM-DD calendar dates, for example 2026-12-18, or the word today.`);
   return day;
 }
 
@@ -132,7 +137,7 @@ const dateFields = (day: Day) => ({ date: formatDay(day), weekday: weekdayName(d
 export function cmdAdd(a: { n: unknown; from: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);
   const n = parseWhole(a.n, 'n');
-  const from = parseDate(a.from, 'from date');
+  const from = parseDate(a.from, 'from date', ctx, state);
   const cal = calendarFor(state);
   const r = addBusinessDays(cal, from, n);
   return envelope(cal, 'add', { n, from: formatDay(from) }, {
@@ -145,8 +150,8 @@ export function cmdAdd(a: { n: unknown; from: unknown; state: unknown }, ctx: Co
 
 export function cmdDiff(a: { from: unknown; to: unknown; inclusive?: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);
-  const from = parseDate(a.from, 'from date');
-  const to = parseDate(a.to, 'to date');
+  const from = parseDate(a.from, 'from date', ctx, state);
+  const to = parseDate(a.to, 'to date', ctx, state);
   const inclusive = parseFlag(a.inclusive, 'inclusive');
   const cal = calendarFor(state);
   const r = businessDaysBetween(cal, from, to, inclusive);
@@ -157,7 +162,7 @@ export function cmdDiff(a: { from: unknown; to: unknown; inclusive?: unknown; st
 
 export function cmdIs(a: { date: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);
-  const day = parseDate(a.date, 'date');
+  const day = parseDate(a.date, 'date', ctx, state);
   const cal = calendarFor(state);
   const info = dayInfo(cal, day);
   const reasons: Record<string, unknown>[] = [];
@@ -168,7 +173,7 @@ export function cmdIs(a: { date: unknown; state: unknown }, ctx: Context): Envel
 
 function nearby(command: 'next' | 'prev', a: { date: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);
-  const day = parseDate(a.date, 'date');
+  const day = parseDate(a.date, 'date', ctx, state);
   const cal = calendarFor(state);
   const r = addBusinessDays(cal, day, command === 'next' ? 1 : -1);
   return envelope(cal, command, { date: formatDay(day) }, { from: formatDay(day), ...dateFields(r.date) }, r.touched, ctx);
@@ -178,7 +183,7 @@ export const cmdPrev = (a: { date: unknown; state: unknown }, ctx: Context) => n
 
 export function cmdRoll(a: { date: unknown; direction: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);
-  const day = parseDate(a.date, 'date');
+  const day = parseDate(a.date, 'date', ctx, state);
   const direction: Direction = parseChoice(a.direction, 'direction', ['forward', 'back'] as const);
   const cal = calendarFor(state);
   const r = rollToBusinessDay(cal, day, direction);
@@ -190,7 +195,7 @@ export function cmdRoll(a: { date: unknown; direction: unknown; state: unknown }
 export function cmdAddCalendar(a: { n: unknown; from: unknown; roll: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);
   const n = parseWhole(a.n, 'n');
-  const from = parseDate(a.from, 'from date');
+  const from = parseDate(a.from, 'from date', ctx, state);
   const roll: Roll = parseChoice(a.roll, 'roll', ['forward', 'back', 'none'] as const);
   const cal = calendarFor(state);
   const r = addCalendarDays(cal, from, n, roll);

@@ -1,6 +1,6 @@
 {
   "name": "au-bizdays",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Business-day and deadline arithmetic for Australian states and territories, with per-state public holidays. A CLI and a read-only MCP server.",
   "keywords": [
     "mcp",
@@ -45,7 +45,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && node -e \"for (const f of ['dist/cli.js', 'dist/mcp.js']) require('fs').chmodSync(f, 0o755)\"",
-    "lint": "tsc -p tsconfig.json --noEmit && node scripts/check-text.mjs && node --check scripts/refresh-holidays.mjs && node --check scripts/lib/parse.mjs",
+    "lint": "tsc -p tsconfig.json --noEmit && node scripts/check-text.mjs && node --check scripts/refresh-holidays.mjs && node --check scripts/lib/parse.mjs && node --check scripts/release.mjs && node --check scripts/render-demo.mjs",
     "check": "npm run lint && node scripts/render-demo.mjs --check",
     "assets": "node scripts/render-demo.mjs",
     "refresh": "node scripts/refresh-holidays.mjs --check",
@@ -59,7 +59,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/node": "^22.20.5",
-    "typescript": "^5.9.3"
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
   }
 }

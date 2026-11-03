@@ -2,7 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { CallToolRequestSchema, ErrorCode, McpError } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 import { CoverageError, UsageError } from './calendar.js';
-import { today } from './clock.js';
+import { today, todayIn } from './clock.js';
 import { SCHEMA, cmdAdd, cmdAddCalendar, cmdDiff, cmdHolidays, cmdIs, cmdNext, cmdPrev, cmdRoll } from './commands.js';
 import type { Context, Envelope } from './commands.js';
 import { oneLine } from './render.js';
@@ -13,7 +13,7 @@ export { VERSION };
 const READ_ONLY = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false } as const;
 
 const state = z.string().describe('Australian state or territory: ACT, NSW, NT, QLD, SA, TAS, VIC or WA (case-insensitive). Required, because public holidays differ by state and there is no default.');
-const date = (what: string) => z.string().describe(`${what}, as a calendar date YYYY-MM-DD, for example 2026-12-18.`);
+const date = (what: string) => z.string().describe(`${what}, as a calendar date YYYY-MM-DD, for example 2026-12-18, or the word today (the date now on the state's clock).`);
 
 const output = {
   schema: z.literal(SCHEMA),
@@ -31,7 +31,7 @@ const DEFINITION =
 export function createServer(): McpServer {
   const server = new McpServer({ name: 'au-bizdays', version: VERSION });
 
-  const ctx = (): Context => ({ today: today() });
+  const ctx = (): Context => ({ today: today(), todayIn });
 
   type Run = (args: Record<string, unknown>, ctx: Context) => Envelope;
   const handlers = new Map<string, (args: Record<string, unknown>) => unknown>();

@@ -1,23 +1,47 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { connect, root } from './helpers.mjs';
 
 const readme = readFileSync(join(root, 'README.md'), 'utf8');
+const commands = readFileSync(join(root, 'docs', 'commands.md'), 'utf8');
+const data = readFileSync(join(root, 'docs', 'data.md'), 'utf8');
+const docs = `${readme}\n${commands}\n${data}`;
 
-test('README generated blocks are the real, current output of the code and data', async () => {
-  const { render } = await import('../scripts/render-demo.mjs');
-  assert.equal(render(readme), readme, 'README is stale: run npm run assets');
+test('generated blocks in the README and docs are the real, current output of the code and data', async () => {
+  const { render, FILES } = await import('../scripts/render-demo.mjs');
+  for (const file of FILES) {
+    const text = readFileSync(join(root, file), 'utf8');
+    assert.equal(render(file, text), text, `${file} is stale: run npm run assets`);
+  }
 });
 
-test('README demo block shows every command', () => {
+test('the README shows real output above the first heading, including the refusal outside the data', () => {
   const demo = /<!-- demo:start -->\n```console\n([\s\S]*?)\n```\n<!-- demo:end -->/.exec(readme);
   assert.ok(demo, 'README needs a demo block');
+  assert.ok(readme.indexOf('<!-- demo:start -->') < readme.indexOf('\n## '), 'the demo belongs above the first section');
+  assert.match(demo[1], /^\$ au-bizdays add /m);
+  assert.match(demo[1], /\(exit 3\)/);
+});
+
+test('the full demo in docs/commands.md shows every command', () => {
+  const demo = /<!-- demo-full:start -->\n```console\n([\s\S]*?)\n```\n<!-- demo-full:end -->/.exec(commands);
+  assert.ok(demo, 'docs/commands.md needs a demo-full block');
   for (const c of ['add', 'diff', 'is', 'next', 'prev', 'roll', 'add-calendar', 'holidays']) {
     assert.match(demo[1], new RegExp(`^\\$ au-bizdays ${c} `, 'm'), `demo is missing ${c}`);
   }
+  assert.match(demo[1], /--from today/);
   assert.match(demo[1], /\(exit 3\)/);
+});
+
+test('every relative link in the README and docs points at a file that exists', () => {
+  for (const [name, text] of [['README.md', readme], ['docs/commands.md', commands], ['docs/data.md', data]]) {
+    const base = name.includes('/') ? join(root, 'docs') : root;
+    for (const m of text.matchAll(/\]\((?!https?:|#|mailto:)([^)#\s]+)/g)) {
+      assert.ok(existsSync(join(base, m[1])), `${name} links to missing ${m[1]}`);
+    }
+  }
 });
 
 test('README states the business-day definition and the legal caveat', () => {
@@ -26,21 +50,21 @@ test('README states the business-day definition and the legal caveat', () => {
   assert.match(readme, /own definition wins/i);
 });
 
-test('README does not claim novelty', () => {
-  assert.doesNotMatch(readme, /(?<!read-)\b(first|only|novel|unique|no other)\b[^.]*\b(tool|server|library|cli|mcp)\b/i);
+test('the README and docs do not claim novelty', () => {
+  assert.doesNotMatch(docs, /(?<!read-)\b(first|only|novel|unique|no other)\b[^.]*\b(tool|server|library|cli|mcp)\b/i);
 });
 
-test('README lists every MCP tool', async () => {
+test('the docs list every MCP tool', async () => {
   const c = await connect();
   try {
     const { tools } = await c.client.listTools();
-    for (const t of tools) assert.ok(readme.includes(`\`${t.name}\``), `README missing tool ${t.name}`);
+    for (const t of tools) assert.ok(docs.includes(`\`${t.name}\``), `docs missing tool ${t.name}`);
   } finally {
     await c.close();
   }
 });
 
-test('README documents every JSON result field', async () => {
+test('the docs document every JSON result field', async () => {
   const { ok } = await import('./helpers.mjs');
   const calls = [
     ['add', '10', '--from', '2026-12-18', '--state', 'WA'],
@@ -52,7 +76,7 @@ test('README documents every JSON result field', async () => {
     ['holidays', '--year', '2026', '--state', 'WA'],
   ];
   for (const args of calls) {
-    for (const k of Object.keys(ok(args).result)) assert.ok(readme.includes(`\`${k}\``), `README does not mention result field ${k} (${args[0]})`);
+    for (const k of Object.keys(ok(args).result)) assert.ok(docs.includes(`\`${k}\``), `docs do not mention result field ${k} (${args[0]})`);
   }
 });
 

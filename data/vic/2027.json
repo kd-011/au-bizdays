@@ -13,7 +13,7 @@
     {"date":"2027-03-29","name":"Easter Monday","scope":"statewide","status":"confirmed"},
     {"date":"2027-04-25","name":"Anzac Day","scope":"statewide","status":"confirmed"},
     {"date":"2027-06-14","name":"King's Birthday","scope":"statewide","status":"confirmed"},
-    {"date":"2027-09-24","name":"Friday before the AFL Grand Final","scope":"statewide","status":"estimated","note":"Date not yet announced. The source says it typically falls on the last Friday in September."},
+    {"date":"2027-10-01","name":"Friday before the AFL Grand Final","scope":"statewide","status":"estimated","note":"Not yet gazetted. The AFL has set the 2027 Grand Final for Saturday 2 October, so this is the Friday before it."},
     {"date":"2027-11-02","name":"Melbourne Cup","scope":"statewide","status":"confirmed"},
     {"date":"2027-12-25","name":"Christmas Day","scope":"statewide","status":"confirmed"},
     {"date":"2027-12-26","name":"Boxing Day","scope":"statewide","status":"confirmed"},

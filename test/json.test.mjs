@@ -65,10 +65,11 @@ describe('--json schema (au-bizdays/v1)', () => {
 
 describe('caveats', () => {
   test('an estimated holiday that the result touches is called out', () => {
-    // VIC 2027 Friday before the AFL Grand Final: the page says "subject to AFL schedule".
-    const touched = ok(['add', '1', '--from', '2027-09-23', '--state', 'VIC']);
-    assert.equal(touched.result.date, '2027-09-27');
-    assert.ok(touched.caveats.some((c) => /estimated/i.test(c) && /2027-09-24/.test(c)), touched.caveats.join('\n'));
+    // VIC 2027 Friday before the AFL Grand Final: the AFL has set the Grand Final for Saturday 2 October,
+    // but Victoria has not gazetted the holiday.
+    const touched = ok(['add', '1', '--from', '2027-09-30', '--state', 'VIC']);
+    assert.equal(touched.result.date, '2027-10-04');
+    assert.ok(touched.caveats.some((c) => /estimated/i.test(c) && /2027-10-01/.test(c)), touched.caveats.join('\n'));
     const clear = ok(['add', '1', '--from', '2027-06-01', '--state', 'VIC']);
     assert.ok(!clear.caveats.some((c) => /estimated/i.test(c)));
   });

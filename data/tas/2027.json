@@ -8,11 +8,11 @@
     {"date":"2027-01-26","name":"Australia Day","scope":"statewide","status":"confirmed"},
     {"date":"2027-03-08","name":"Eight Hours Day","scope":"statewide","status":"confirmed"},
     {"date":"2027-03-26","name":"Good Friday","scope":"statewide","status":"confirmed"},
-    {"date":"2027-03-28","name":"Easter Sunday","scope":"statewide","status":"confirmed"},
     {"date":"2027-03-29","name":"Easter Monday","scope":"statewide","status":"confirmed"},
     {"date":"2027-04-25","name":"Anzac Day","scope":"statewide","status":"confirmed"},
     {"date":"2027-06-14","name":"King's Birthday","scope":"statewide","status":"confirmed"},
-    {"date":"2027-12-27","name":"Christmas Day","scope":"statewide","status":"confirmed"},
+    {"date":"2027-12-25","name":"Christmas Day","scope":"statewide","status":"confirmed","note":"A Saturday. The table lists 27 December, and the page's substitute rule makes both the Saturday and the Monday holidays."},
+    {"date":"2027-12-27","name":"Christmas Day (additional day)","scope":"statewide","status":"confirmed"},
     {"date":"2027-12-28","name":"Boxing Day","scope":"statewide","status":"confirmed"}
   ]
 }

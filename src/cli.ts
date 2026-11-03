@@ -4,7 +4,7 @@ import {
   SCHEMA, cmdAdd, cmdAddCalendar, cmdDiff, cmdHolidays, cmdIs, cmdNext, cmdPrev, cmdRoll,
 } from './commands.js';
 import type { Context, Envelope } from './commands.js';
-import { today } from './clock.js';
+import { today, todayIn } from './clock.js';
 import { STATES } from './data.js';
 import { human } from './render.js';
 import { VERSION } from './version.js';
@@ -114,7 +114,7 @@ A business day is Monday to Friday and not a statewide public holiday in the cho
 Part-day, regional and local holidays are not counted. Legislation, court rules or a contract
 may define business days differently; this is not legal advice.
 
-Dates are YYYY-MM-DD. Exit codes: 0 ok, 2 usage error, 3 date outside the bundled holiday data.`;
+Dates are YYYY-MM-DD, or the word today (the date now in the state's capital). Exit codes: 0 ok, 2 usage error, 3 date outside the bundled holiday data.`;
 
 const commandHelp = (name: string, s: Spec) => `au-bizdays ${s.usage}\n\n${s.help}\n\n  ${STATE_LINE}\n  --json            machine-readable output (schema au-bizdays/v1)`;
 
@@ -176,7 +176,7 @@ function main(argv: string[]): number {
       if (FLAG_OPTIONS.has(k) && p.options[k] !== true) throw new UsageError(`--${k} does not take a value.`);
     }
     if (p.positionals.length > spec.positionals.length) throw new UsageError(`Unexpected argument "${p.positionals[spec.positionals.length]}" for ${p.command}.`);
-    const env = spec.run(p.positionals, p.options, { today: today() });
+    const env = spec.run(p.positionals, p.options, { today: today(), todayIn });
     out(json ? JSON.stringify(env, null, 2) : human(env));
     return 0;
   } catch (e) {

@@ -242,3 +242,53 @@ describe('fetching', () => {
     assert.ok(Date.now() - t0 < 5000);
   });
 });
+
+describe('the Friday before the AFL Grand Final', () => {
+  const vic = (year) => parse.parseVIC(vicPage(year), { year }).get(year);
+  const friday = (year) => vic(year).find((e) => /Grand Final/.test(e.name));
+
+  test('2027 is the day before the Grand Final the AFL announced (Saturday 2 October), not the last Friday in September', () => {
+    assert.equal(friday(2027).date, '2027-10-01');
+    assert.equal(friday(2027).status, 'estimated');
+    assert.match(friday(2027).note, /Saturday 2 October/);
+  });
+
+  test('a year the AFL has not announced still falls back to the last Friday in September', () => {
+    assert.equal(friday(2028).date, '2028-09-29');
+    assert.match(friday(2028).note, /last Friday in September/);
+  });
+});
+
+describe('Tasmania, from a table that lists only the substitute day', () => {
+  const dataFile = (y) => JSON.parse(readFileSync(join(root, 'data', 'tas', `${y}.json`), 'utf8'));
+  const long = (date) => `${Number(date.slice(8))} ${new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' })}`;
+  const YEARS = [2026, 2027, 2028];
+  // Tasmania's table, rebuilt from the bundled files the way the page prints it: one row per holiday, one column per year.
+  function tasPage() {
+    const rows = [];
+    const names = ["New Year's Day", 'Australia Day', 'Eight Hours Day', 'Good Friday', 'Easter Monday', 'ANZAC Day', "King's Birthday", 'Christmas Day', 'Boxing Day'];
+    for (const name of names) {
+      const cells = YEARS.map((y) => {
+        const hs = dataFile(y).holidays;
+        const find = (n) => hs.find((h) => h.name.toLowerCase() === n.toLowerCase());
+        // With a weekend Christmas the page lists the substitute day only.
+        return long((name === 'Christmas Day' ? find('Christmas Day (additional day)') ?? find(name) : find(name)).date);
+      });
+      rows.push(`<tr><td>${name}</td>${cells.map((c) => `<td>${c}</td>`).join('')}</tr>`);
+    }
+    return `<html><body><table><tr><th>Holiday</th>${YEARS.map((y) => `<th>${y}</th>`).join('')}</tr>${rows.join('')}</table></body></html>`;
+  }
+
+  test('a table that lists 27 December 2027 for Christmas Day gives back the bundled file, Saturday 25 December included', () => {
+    const got = parse.sortEntries(parse.parseTAS(tasPage()).get(2027));
+    const want = parse.sortEntries(dataFile(2027).holidays);
+    assert.deepEqual(got, want);
+    assert.ok(got.some((e) => e.date === '2027-12-25' && e.name === 'Christmas Day'));
+    assert.ok(got.some((e) => e.date === '2027-12-27' && e.name === 'Christmas Day (additional day)'));
+  });
+
+  test('a year where 25 December is a weekday is left alone', () => {
+    const got = parse.parseTAS(tasPage()).get(2026).filter((e) => /Christmas/.test(e.name));
+    assert.deepEqual(got.map((e) => [e.date, e.name]), [['2026-12-25', 'Christmas Day']]);
+  });
+});

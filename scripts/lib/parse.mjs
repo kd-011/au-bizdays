@@ -364,6 +364,16 @@ export function parseQLD(html) {
   return out;
 }
 
+/**
+ * Grand Finals the AFL has announced, by year. Victoria's Friday holiday is the day before, but
+ * Business Victoria keeps saying "subject to AFL schedule" until the holiday is gazetted, so the
+ * page alone would put 2027 a week early. Source for 2027: afl.com.au, "Dates for 2027 AFL season
+ * confirmed" (Grand Final on Saturday 2 October). Add a year here when the AFL announces it.
+ */
+export const AFL_GRAND_FINAL = { 2027: '2027-10-02' };
+
+const longDate = (date) => new Date(`${date}T00:00:00Z`).toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }).replace(/^(\w+),? /, '$1 ');
+
 export function lastFriday(year, month) {
   let d = daysIn(year, month);
   while (weekdayOf(year, month, d) !== 5) d--;
@@ -382,6 +392,8 @@ export function parseVIC(html, { year }) {
         if (/grand final/i.test(name) && !new RegExp(WEEKDAY_RE, 'i').test(text)) {
           // "Subject to AFL schedule": the page says the date typically falls on the last Friday in September.
           if (!/last friday in september/i.test(pageText)) throw new ParseError(`VIC ${y}: Grand Final Friday has no date and the page no longer gives the usual-date rule`);
+          const gf = AFL_GRAND_FINAL[y];
+          if (gf) return { dates: [addDays(gf, -1)], status: 'estimated', note: `Not yet gazetted. The AFL has set the ${y} Grand Final for ${longDate(gf)}, so this is the Friday before it.` };
           return { dates: [lastFriday(y, 9)], status: 'estimated', note: 'Date not yet announced. The source says it typically falls on the last Friday in September.' };
         }
         return weekdayCell('VIC')(text, y, name);
@@ -419,6 +431,14 @@ export function parseTAS(html) {
     const wd = weekdayOf(year, Number(nyd.date.slice(5, 7)), Number(nyd.date.slice(8)));
     if ((wd === 6 || wd === 0) && !list.some((e) => e.name === "New Year's Day (additional day)")) {
       list.push({ date: addDays(nyd.date, wd === 6 ? 2 : 1), name: "New Year's Day (additional day)", scope: 'statewide', status: 'estimated', note: "The table lists 1 January only. The Monday comes from the page's own rule that a weekend New Year's Day moves to the following Monday." });
+    }
+    // Christmas Day on a weekend: the table lists only the substitute (27 December), but the page's
+    // substitute rule makes 25 December a holiday as well, so keep it and call the 27th the additional day.
+    const xmas = list.find((e) => e.name === 'Christmas Day');
+    if (xmas && xmas.date !== `${year}-12-25`) {
+      const day = weekdayOf(year, 12, 25) === 6 ? 'Saturday' : 'Sunday';
+      xmas.name = 'Christmas Day (additional day)';
+      list.push({ date: `${year}-12-25`, name: 'Christmas Day', scope: 'statewide', status: 'confirmed', note: `A ${day}. The table lists 27 December, and the page's substitute rule makes both the ${day} and the ${day === 'Saturday' ? 'Monday' : 'Tuesday'} holidays.` });
     }
   }
   return out;
