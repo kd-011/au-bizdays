@@ -7,7 +7,7 @@
 # workflow by itself; push an empty commit to the branch or close and reopen it.
 #
 # The VIC, NT, TAS and SA sites answer scripts with a bot challenge, so those four show up as
-# "NOT VERIFIED" in the report. See the README.
+# "NOT VERIFIED" in the report. See docs/data.md.
 name: refresh-holidays
 on:
   schedule:

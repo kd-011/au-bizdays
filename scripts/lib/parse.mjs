@@ -9,8 +9,6 @@ const WEEKDAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'frida
 const MONTH_RE = MONTHS.join('|');
 const WEEKDAY_RE = WEEKDAYS.join('|');
 
-// ---------------------------------------------------------------- text helpers
-
 const ENTITIES = { amp: '&', nbsp: ' ', rsquo: "'", lsquo: "'", ndash: '-', mdash: '-', quot: '"', apos: "'", lt: '<', gt: '>', hellip: '...' };
 
 export function decode(s) {
@@ -67,8 +65,6 @@ export function tablesOf(html) {
   }
   return out;
 }
-
-// ---------------------------------------------------------------- dates
 
 const pad = (n) => String(n).padStart(2, '0');
 export const iso = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
@@ -133,8 +129,6 @@ export function parseDayMonth(text, { year, context }) {
   if (day < 1 || day > daysIn(year, month)) throw new ParseError(`${context}: impossible date "${text}"`);
   return iso(year, month, day);
 }
-
-// ---------------------------------------------------------------- names and scope
 
 const key = (s) => s.toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim();
 
@@ -204,8 +198,6 @@ export function entriesFor(rawName, dates, { pageText = '', extraText = '', cont
   });
 }
 
-// ---------------------------------------------------------------- validation
-
 const REQUIRED = ["New Year's Day", 'Australia Day', 'Good Friday', 'Easter Monday', 'Anzac Day', 'Christmas Day'];
 
 /** Fail when a parsed year is too thin to be right. Run on every year every parser returns. */
@@ -232,7 +224,6 @@ export function sortEntries(entries) {
   return [...entries].sort((a, b) => (a.date === b.date ? a.name.localeCompare(b.name) : a.date.localeCompare(b.date)));
 }
 
-// ---------------------------------------------------------------- state parsers
 // Each returns Map<year, entry[]> for every year the page shows.
 
 function add(map, entries) {
@@ -380,7 +371,6 @@ export function lastFriday(year, month) {
   return iso(year, month, d);
 }
 
-/** One Business Victoria page per year. */
 export function parseVIC(html, { year }) {
   const pageText = textOf(html);
   const out = new Map();
@@ -515,8 +505,6 @@ export function parseSA(html) {
   requireYears(out, [2025, 2026, 2027, 2028], 'SA');
   return out;
 }
-
-// ---------------------------------------------------------------- data.gov.au CSV
 
 export function parseCsv(text) {
   const rows = [];

@@ -1,5 +1,4 @@
-// Fails when a tracked text file contains an em dash. The repo's writing rule is
-// commas, colons and full stops instead. Run by `npm run check`.
+// Fails on an em dash in any tracked text file. Run by `npm run check`.
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 

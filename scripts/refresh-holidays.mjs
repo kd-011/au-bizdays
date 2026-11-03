@@ -57,8 +57,6 @@ export const SOURCES = [
   { id: 'dga-2025', state: '*', url: DGA_URL, ext: 'csv', expect: [2025], parse: parseDga },
 ];
 
-// ---------------------------------------------------------------- fetching
-
 export class BlockedError extends Error {}
 
 export async function fetchText(url, { timeoutMs = TIMEOUT_MS } = {}) {
@@ -110,8 +108,6 @@ async function loadSource(src, opts) {
   }
 }
 
-// ---------------------------------------------------------------- data files
-
 const fileFor = (dir, state, year) => join(dir, state.toLowerCase(), `${year}.json`);
 
 function readExisting(dir, state, year) {
@@ -137,8 +133,6 @@ function diffEntries(oldList, newList) {
     ...[...n].filter(([k]) => !o.has(k)).map(([, e]) => `+ ${entryText(e)}`),
   ].sort((a, b) => a.slice(2).localeCompare(b.slice(2)) || a.localeCompare(b));
 }
-
-// ---------------------------------------------------------------- the run
 
 export async function refresh(opts) {
   const results = new Map();
@@ -242,8 +236,6 @@ export function exitCode(report, { allowBlocked }) {
   if (report.unverified.length && !allowBlocked) return 4;
   return 0;
 }
-
-// ---------------------------------------------------------------- main
 
 function parseArgs(argv) {
   const o = { today: new Date().toISOString().slice(0, 10), through: DEFAULT_THROUGH, dataDir: DATA_DIR };

@@ -1,22 +1,16 @@
-# Publishes to npm and cuts the GitHub Release when package.json carries a version npm does not have yet.
+# Publishes to npm and cuts the GitHub Release when package.json has a version npm does not.
 #
-# To release: put a "## [x.y.z]" section in CHANGELOG.md, raise the version in package.json, src/version.ts and
-# server.json (the build test checks they agree), and merge the pull request. This workflow then compares
-# package.json's version with what npm has (scripts/release.mjs plan). If it is new, it runs the checks, publishes
-# with provenance, then creates the v<version> tag and a GitHub Release whose notes are that CHANGELOG section.
-# Re-running a failed run finishes whatever is left, so a failed release step does not need a new version.
-# It can also be started by hand from the Actions tab (workflow_dispatch), which is how the first publish happens.
+# To release: add a "## [x.y.z]" section to CHANGELOG.md, raise the version in package.json, src/version.ts and
+# server.json, and merge. Re-running a failed run finishes whatever is left, so it does not need a new version.
+# The first publish is started by hand from the Actions tab.
 #
-# Until au-bizdays exists on npm there is nothing to publish with unless the NPM_TOKEN repository secret is set.
-# In that state the plan step prints a notice and the run ends green, so a merge never leaves a red run on main.
+# With no NPM_TOKEN secret and nothing on npm yet, the plan step prints a notice and the run stays green.
 #
-# npm auth, in this order, with no edit needed to switch:
-#   1. The repository secret NPM_TOKEN, when it exists: a granular token with publish rights on au-bizdays and
-#      bypass 2FA on. The first publish has to use this, because trusted publishing can only be configured on a
-#      package that already exists.
-#   2. Otherwise npm trusted publishing over OIDC. One-time setup on npmjs.com: the package's Settings >
-#      Trusted publisher > GitHub Actions, repository kd-011/au-bizdays, workflow filename publish.yml.
-#      It needs npm 11.5.1 or later (installed below) and `id-token: write`.
+# npm auth, with no edit needed to switch:
+#   1. The NPM_TOKEN secret when set: a granular token with publish rights and bypass 2FA on. The first publish has
+#      to use this, because trusted publishing can only be configured on a package that already exists.
+#   2. Otherwise trusted publishing over OIDC. Set it up on npmjs.com under the package's Settings > Trusted
+#      publisher > GitHub Actions, with repository kd-011/au-bizdays and workflow filename publish.yml.
 # Provenance needs the repository to stay public.
 name: publish
 

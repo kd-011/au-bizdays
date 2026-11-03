@@ -41,8 +41,6 @@ export interface Context {
   todayIn?: (state: State) => string;
 }
 
-// ---------------------------------------------------------------- input checks
-
 export function parseState(v: unknown): State {
   if (typeof v !== 'string' || v.trim() === '') throw new UsageError(`A state is required: one of ${STATES.join(', ')}.`);
   const s = v.trim().toUpperCase();
@@ -98,8 +96,6 @@ function calendarFor(state: State): Calendar {
   return cal;
 }
 
-// ---------------------------------------------------------------- envelope
-
 function assumptionsFor(cal: Calendar): Assumptions {
   const years = cal.data.years;
   return {
@@ -131,8 +127,6 @@ function envelope(
 }
 
 const dateFields = (day: Day) => ({ date: formatDay(day), weekday: weekdayName(day) });
-
-// ---------------------------------------------------------------- commands
 
 export function cmdAdd(a: { n: unknown; from: unknown; state: unknown }, ctx: Context): Envelope {
   const state = parseState(a.state);

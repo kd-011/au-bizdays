@@ -31,14 +31,8 @@ export function compare(a, b) {
   return 0;
 }
 
-/**
- * What is left to do for `version`.
- * @param {string} version  from package.json
- * @param {string[]} published  every version npm has, pre-releases included
- * @param {boolean} releaseExists  whether the v<version> GitHub Release (and so the tag) exists
- * @param {boolean} haveToken  whether an NPM_TOKEN secret is available. Trusted publishing can only be set up on
- *   a package that already exists, so the very first publish needs the token.
- */
+// `published` includes pre-releases. Trusted publishing only works on a package that already exists, so the very
+// first publish needs the token.
 export function planRelease(version, published, releaseExists, haveToken = true) {
   if (!STABLE.test(version)) {
     throw new Error(`version "${version}" is not x.y.z. Pre-release and build versions are not published by this workflow.`);

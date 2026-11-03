@@ -12,7 +12,6 @@ export const specificCaveats = (env: Envelope): string[] => env.caveats.slice(0,
 const FOOTER = (state: string) =>
   `Business day = Monday to Friday, excluding ${state} statewide public holidays. Not legal advice; your contract or the law may differ.`;
 
-/** One sentence that states the answer. */
 export function summary(env: Envelope): string {
   const r = env.result;
   const s = env.state;

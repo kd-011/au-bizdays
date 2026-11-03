@@ -72,8 +72,6 @@ describe('csv', () => {
   });
 });
 
-// ---------------------------------------------------------------- fixtures built from the real data
-
 const WEEKDAY = (date) => new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
 const LONG = (date) => `${WEEKDAY(date)} ${Number(date.slice(8))} ${new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' })}`;
 

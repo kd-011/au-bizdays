@@ -10,4 +10,4 @@ A wrong holiday date is not a security problem. Open an issue and link the offic
 
 ## The refresh script
 
-`scripts/refresh-holidays.mjs` is a maintenance tool and is not part of the published package. It fetches the government pages listed in the README with a 30 second timeout and writes only to `data/`. The monthly workflow gives it a token that can open pull requests and cannot push to the default branch.
+`scripts/refresh-holidays.mjs` is a maintenance tool and is not part of the published package. It fetches the government pages listed in `docs/data.md` with a 30 second timeout and writes only to `data/`. The monthly workflow gives it a token that can open pull requests and cannot push to the default branch.

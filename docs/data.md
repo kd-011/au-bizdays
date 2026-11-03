@@ -52,7 +52,7 @@ Not rechecked by hand: 2025 and 2028. The refresh script compares 2025 to 2028 f
 
 ## Estimated entries
 
-Estimated entries are dates the source has not fixed yet. Every result that touches one carries a caveat. At the time of writing they are:
+Estimated entries are dates the source has not fixed yet. Every result that touches one carries a caveat. They are:
 
 - All of NSW 2028. The NSW page publishes 2026 and 2027 only, so 2028 follows the pattern of NSW's own dates (King's Birthday on the second Monday in June, Labour Day on the first Monday in October, an additional day after a weekend New Year's Day) and the Easter dates other states publish. It was not read from an NSW source.
 - The Friday before the AFL Grand Final in Victoria for 2027 (1 October, from the AFL's announced Grand Final date) and 2028 (the last Friday in September, which Business Victoria says is typical).

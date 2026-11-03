@@ -11,7 +11,6 @@ export function standingCaveats(state: string): string[] {
 }
 
 export interface CaveatOptions {
-  /** The days the answer depended on. */
   touched: Span;
   /** Today as a day number, for the end-of-coverage warning. */
   today: Day;
