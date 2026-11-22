@@ -1,0 +1,1725 @@
+{
+  "version": 1,
+  "docs": {
+    "au-bizdays-agents": {
+      "claims": {
+        "30ecd241c807": {
+          "text": "Install: `npm install` (or `npm ci`). `prepare` runs the build, so install also writes `dist/`. Node 18 or newer.",
+          "line": 15,
+          "specs": [
+            "package.json#scripts.prepare",
+            "package.json#engines.node"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.prepare": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.prepare",
+                "hash": "03f011861f607ce54ae32d12e830cb5bc7dcbef8",
+                "value": "\"npm run build\""
+              }
+            },
+            "package.json#engines.node": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "engines.node",
+                "hash": "8b1eef9db8111943994ac9ef00463b0def9526f3",
+                "value": "\">=18\""
+              }
+            }
+          }
+        },
+        "593ead111b48": {
+          "text": "Build: `npm run build` (tsc into `dist/`, then marks `dist/cli.js` and `dist/mcp.js` executable).",
+          "line": 16,
+          "specs": [
+            "package.json#scripts.build"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.build": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.build",
+                "hash": "c0d431ba4de7561023052b0652a2cbfc3e737c49",
+                "value": "\"tsc -p tsconfig.json && node -e \\\"for (const f of ['dist/cli.js', 'dist/mcp.js']) require('fs').chmodSync(f, 0o755)\\\"\""
+              }
+            }
+          }
+        },
+        "fdc34b16cf2a": {
+          "text": "Run the CLI from a checkout: `node dist/cli.js add 10 --from 2026-12-18 --state WA`. The MCP server is `node dist/mcp.js`, started by an MCP client over stdi...",
+          "line": 17,
+          "specs": [
+            "package.json#bin",
+            "src/mcp.ts:7-10"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#bin": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "bin",
+                "hash": "de99ff59469ed74e97caa994d4ce95a76c565387",
+                "value": "{\"au-bizdays\":\"dist/cli.js\",\"au-bizdays-mcp\":\"dist/mcp.js\"}"
+              }
+            },
+            "src/mcp.ts": {
+              "path": "src/mcp.ts",
+              "blob": "820e65ae7c7e6a389903cbb19254a0ae160b78a1",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 7,
+                "end": 10,
+                "hash": "1421e572bc5e555152f810d6fb2cb6a828a1229d"
+              }
+            }
+          }
+        },
+        "c4f7b3f60f90": {
+          "text": "Lint and typecheck: `npm run lint` (tsc `--noEmit`, the em dash check, and `node --check` on each script). There is no formatter.",
+          "line": 18,
+          "specs": [
+            "package.json#scripts.lint",
+            "scripts/check-text.mjs"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.lint": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.lint",
+                "hash": "dbea01b680bfcc053b893968bcddad0dd3d26b92",
+                "value": "\"tsc -p tsconfig.json --noEmit && node scripts/check-text.mjs && node --check scripts/refresh-holidays.mjs && node --..."
+              }
+            },
+            "scripts/check-text.mjs": {
+              "path": "scripts/check-text.mjs",
+              "blob": "3143c1f45bf854b71766130e5839500f64661770",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "6ecb79f765b6": {
+          "text": "Test: `npm test` builds first, then runs `node --test test/*.test.mjs` against the built `dist/`. One file while iterating: `npm run build && node --test tes...",
+          "line": 19,
+          "specs": [
+            "package.json#scripts.pretest",
+            "package.json#scripts.test",
+            "test/helpers.mjs:9-14"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.pretest": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.pretest",
+                "hash": "03f011861f607ce54ae32d12e830cb5bc7dcbef8",
+                "value": "\"npm run build\""
+              }
+            },
+            "package.json#scripts.test": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.test",
+                "hash": "718d1ec627682e885f999d73ced06047bf3f48b3",
+                "value": "\"node --test test/*.test.mjs\""
+              }
+            },
+            "test/helpers.mjs": {
+              "path": "test/helpers.mjs",
+              "blob": "6e473b6855190cffc5653969284346e274b05ce5",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 9,
+                "end": 14,
+                "hash": "54e0dd7b31ebfcd920191b98b1827965e473d8f9"
+              }
+            }
+          }
+        },
+        "6787dbc87964": {
+          "text": "Timezone check: `npm run test:tz` reruns the suite under `TZ=Australia/Perth` and `TZ=America/Los_Angeles`.",
+          "line": 20,
+          "specs": [
+            "package.json#scripts.test:tz"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.test:tz": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.test:tz",
+                "hash": "31299b795aff7ab694ab0a2fc4b9baa8efe1b5c2",
+                "value": "\"npm run build && TZ=Australia/Perth node --test test/*.test.mjs && TZ=America/Los_Angeles node --test test/*.test.mjs\""
+              }
+            }
+          }
+        },
+        "090540b09c0e": {
+          "text": "Generated blocks: `npm run assets` rewrites the demo and sources blocks in README.md, docs/commands.md and docs/data.md from the built CLI and the data; `npm...",
+          "line": 21,
+          "specs": [
+            "package.json#scripts.assets",
+            "package.json#scripts.check",
+            "scripts/render-demo.mjs:1-6"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.assets": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.assets",
+                "hash": "a67337eaca28a249a07966eb34cbe6e193ed2c49",
+                "value": "\"node scripts/render-demo.mjs\""
+              }
+            },
+            "package.json#scripts.check": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.check",
+                "hash": "5804b04b9203d6d77819469af36d845a32fb45ee",
+                "value": "\"npm run lint && node scripts/render-demo.mjs --check\""
+              }
+            },
+            "scripts/render-demo.mjs": {
+              "path": "scripts/render-demo.mjs",
+              "blob": "e453ce3228f98736ff15b293ed43d3c85675411d",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 1,
+                "end": 6,
+                "hash": "c64b9777809028a1a876a8e8d44edbc8babc7dab"
+              }
+            }
+          }
+        },
+        "34cedde201b4": {
+          "text": "Holiday data: `npm run refresh` compares `data/` with the official pages; `node scripts/refresh-holidays.mjs --write` updates it. Needs network.",
+          "line": 22,
+          "specs": [
+            "package.json#scripts.refresh",
+            "scripts/refresh-holidays.mjs:1-19"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.refresh": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.refresh",
+                "hash": "a6375a5fb380a6d79cf8ebf0279fc8cf9601d2c9",
+                "value": "\"node scripts/refresh-holidays.mjs --check\""
+              }
+            },
+            "scripts/refresh-holidays.mjs": {
+              "path": "scripts/refresh-holidays.mjs",
+              "blob": "4972303d7b694b79b7f0e4c8ead535403b28eec2",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 1,
+                "end": 19,
+                "hash": "9597cddf7126db88b9acec3440746ca11171d739"
+              }
+            }
+          }
+        },
+        "752fef76083e": {
+          "text": "CI runs lint, build, test, test:tz and `npm pack --dry-run` on Node 18 and 22.",
+          "line": 23,
+          "specs": [
+            ".github/workflows/ci.yml"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/workflows/ci.yml": {
+              "path": ".github/workflows/ci.yml",
+              "blob": "43512ee8b35ab4864d641bd1a0610bce7335abcf",
+              "commit": "03de43e5b9575d348213e5e31e73a0fb11b7f528"
+            }
+          }
+        },
+        "738ed1a26f8b": {
+          "text": "`src/commands.ts` holds the eight operations, shared by the CLI and the MCP server so both give the same answer and the same error text. A new command goes t...",
+          "line": 27,
+          "specs": [
+            "src/commands.ts:1-2",
+            "src/cli.ts:23-86",
+            "src/server.ts:60-122"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/commands.ts": {
+              "path": "src/commands.ts",
+              "blob": "8b6b593beac35bb89ba7260335e5ebf5b67546a6",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 1,
+                "end": 2,
+                "hash": "44eab5e4d8bf4ab25e9a25933f168fef6fab43da"
+              }
+            },
+            "src/cli.ts": {
+              "path": "src/cli.ts",
+              "blob": "3897957aa6acd88abbb6ca43e7d404e612146692",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 23,
+                "end": 86,
+                "hash": "8c4f67a05c99e76491f7da465ea689569f431d90"
+              }
+            },
+            "src/server.ts": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 60,
+                "end": 122,
+                "hash": "6a1be3836fbbd0d680539286f93241eab435b075"
+              }
+            }
+          }
+        },
+        "5b24ecb9da41": {
+          "text": "`src/calendar.ts` is pure: no file, clock or timezone reads. The clock comes in through a `Context`, and `src/data.ts` is the only filesystem access in the p...",
+          "line": 28,
+          "specs": [
+            "src/calendar.ts:1-2",
+            "src/commands.ts:38-42",
+            "src/data.ts:57"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/calendar.ts": {
+              "path": "src/calendar.ts",
+              "blob": "b353e2c1edbab615badc6c20bda601efc1233f35",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 1,
+                "end": 2,
+                "hash": "2a5cc1dfde4f75cdc6ceb8110d65c248d9d889ca"
+              }
+            },
+            "src/commands.ts": {
+              "path": "src/commands.ts",
+              "blob": "8b6b593beac35bb89ba7260335e5ebf5b67546a6",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 38,
+                "end": 42,
+                "hash": "4025cc044cb6084f35d55d4f8f83793efbb7136f"
+              }
+            },
+            "src/data.ts": {
+              "path": "src/data.ts",
+              "blob": "8007599771f40b0607229bbcfdadb0ae3702c9b7",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 57,
+                "end": 57,
+                "hash": "17dafc479221dbb3e3de2ed7233b842b4e8275c6"
+              }
+            }
+          }
+        },
+        "70d34cf4f70b": {
+          "text": "Dates are day numbers, never `Date` objects, so the machine timezone cannot change an answer. The word `today` is resolved on the state capital's clock in `s...",
+          "line": 29,
+          "specs": [
+            "src/date.ts:1-2",
+            "src/clock.ts:4-14",
+            "CONTRIBUTING.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/date.ts": {
+              "path": "src/date.ts",
+              "blob": "a3340cd1e8753924bd2d07140b94f1d6d280bab1",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 1,
+                "end": 2,
+                "hash": "93e2b99917818a4146c05d63f804e64da5686eeb"
+              }
+            },
+            "src/clock.ts": {
+              "path": "src/clock.ts",
+              "blob": "de77d91b80abb6b34e90b33c404f0c96535f31d9",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 4,
+                "end": 14,
+                "hash": "f44c59295f7312315757200f7603ce4d70b1f3cd"
+              }
+            },
+            "CONTRIBUTING.md": {
+              "path": "CONTRIBUTING.md",
+              "blob": "506b31aff7af566c3d12f8fb89bbb5f717aacb3b",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            }
+          }
+        },
+        "c513683a07e6": {
+          "text": "Holiday data comes from official government pages, with `source_url` and `retrieved_on` in every year file. Never guess a holiday: a date outside the data is...",
+          "line": 30,
+          "specs": [
+            "CONTRIBUTING.md",
+            "src/data.ts:46-49"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "CONTRIBUTING.md": {
+              "path": "CONTRIBUTING.md",
+              "blob": "506b31aff7af566c3d12f8fb89bbb5f717aacb3b",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "src/data.ts": {
+              "path": "src/data.ts",
+              "blob": "8007599771f40b0607229bbcfdadb0ae3702c9b7",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 46,
+                "end": 49,
+                "hash": "ec8fbcc2ffe9823f1a771afd9880f498653106fd"
+              }
+            }
+          }
+        },
+        "10f76c1fde36": {
+          "text": "Runtime dependencies are the MCP SDK and zod only; a test pins them, along with `files` in package.json and `mcpName`.",
+          "line": 31,
+          "specs": [
+            "test/readme.test.mjs:83-91",
+            "CONTRIBUTING.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "test/readme.test.mjs": {
+              "path": "test/readme.test.mjs",
+              "blob": "1ee9da6db9f72e3ebbb4744a798902718c345d27",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 83,
+                "end": 91,
+                "hash": "d0dceb607f0173b651ca27d52121290a565c83f5"
+              }
+            },
+            "CONTRIBUTING.md": {
+              "path": "CONTRIBUTING.md",
+              "blob": "506b31aff7af566c3d12f8fb89bbb5f717aacb3b",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            }
+          }
+        },
+        "8b99af2c3b02": {
+          "text": "A release raises the version in package.json, src/version.ts and server.json together and adds a `## [x.y.z]` section to CHANGELOG.md; tests check both.",
+          "line": 32,
+          "specs": [
+            ".github/workflows/publish.yml:3-5",
+            "test/readme.test.mjs:83-91",
+            "test/release.test.mjs:86"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/workflows/publish.yml": {
+              "path": ".github/workflows/publish.yml",
+              "blob": "907590a42e6e929a635a6203ac69c0b63a17e2cf",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 3,
+                "end": 5,
+                "hash": "1ca06481337281a0eb1c4d13b8ebf8e111fec8cf"
+              }
+            },
+            "test/readme.test.mjs": {
+              "path": "test/readme.test.mjs",
+              "blob": "1ee9da6db9f72e3ebbb4744a798902718c345d27",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 83,
+                "end": 91,
+                "hash": "d0dceb607f0173b651ca27d52121290a565c83f5"
+              }
+            },
+            "test/release.test.mjs": {
+              "path": "test/release.test.mjs",
+              "blob": "cd005d983c4626ec8cf57b7b77f482a6428b13a4",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 86,
+                "end": 86,
+                "hash": "ca9899aea634c29bd1cc17c6fd0a87cd41e16116"
+              }
+            }
+          }
+        },
+        "19f37f4e760d": {
+          "text": "Plain English, no em dashes, no marketing words. Commit messages are plain sentences with no prefix.",
+          "line": 33,
+          "specs": [
+            "CONTRIBUTING.md",
+            "scripts/check-text.mjs"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "CONTRIBUTING.md": {
+              "path": "CONTRIBUTING.md",
+              "blob": "506b31aff7af566c3d12f8fb89bbb5f717aacb3b",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "scripts/check-text.mjs": {
+              "path": "scripts/check-text.mjs",
+              "blob": "3143c1f45bf854b71766130e5839500f64661770",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "f75bc2d0ef29": {
+          "text": "The repo is public. A test fails on an em dash or an absolute home directory path (Linux or macOS style) in any tracked text file, docs included: write `~/` ...",
+          "line": 37,
+          "specs": [
+            "test/readme.test.mjs:93-102"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "test/readme.test.mjs": {
+              "path": "test/readme.test.mjs",
+              "blob": "1ee9da6db9f72e3ebbb4744a798902718c345d27",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 93,
+                "end": 102,
+                "hash": "f6d6f782c8dad7ee3379cafb97df7f2df7ec2d60"
+              }
+            }
+          }
+        },
+        "a05a6246f282": {
+          "text": "The demo blocks in README.md and docs/commands.md are generated and a test fails when they go stale. After any change to command output or data, run `npm run...",
+          "line": 38,
+          "specs": [
+            "test/readme.test.mjs:12-18",
+            "scripts/render-demo.mjs:1-6"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "test/readme.test.mjs": {
+              "path": "test/readme.test.mjs",
+              "blob": "1ee9da6db9f72e3ebbb4744a798902718c345d27",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 12,
+                "end": 18,
+                "hash": "e35b5770cda181af9580dbb616ef5dcd41d4e67b"
+              }
+            },
+            "scripts/render-demo.mjs": {
+              "path": "scripts/render-demo.mjs",
+              "blob": "e453ce3228f98736ff15b293ed43d3c85675411d",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 1,
+                "end": 6,
+                "hash": "c64b9777809028a1a876a8e8d44edbc8babc7dab"
+              }
+            }
+          }
+        },
+        "b1c63ad3cb08": {
+          "text": "A test fails unless the docs mention every MCP tool name and every JSON result field in backticks, and another rejects novelty claims (\"first\", \"only\", \"uniq...",
+          "line": 39,
+          "specs": [
+            "test/readme.test.mjs:53-80"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "test/readme.test.mjs": {
+              "path": "test/readme.test.mjs",
+              "blob": "1ee9da6db9f72e3ebbb4744a798902718c345d27",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 53,
+                "end": 80,
+                "hash": "4bc2f74a480de99d581d4e4f1578d19810f5a4c6"
+              }
+            }
+          }
+        },
+        "e8ba906250a1": {
+          "text": "Tests run the built `dist/`, so a test run on stale output tests old code. `npm test` rebuilds; a bare `node --test` does not.",
+          "line": 40,
+          "specs": [
+            "package.json#scripts.pretest",
+            "test/helpers.mjs:9-14"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#scripts.pretest": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "scripts.pretest",
+                "hash": "03f011861f607ce54ae32d12e830cb5bc7dcbef8",
+                "value": "\"npm run build\""
+              }
+            },
+            "test/helpers.mjs": {
+              "path": "test/helpers.mjs",
+              "blob": "6e473b6855190cffc5653969284346e274b05ce5",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 9,
+                "end": 14,
+                "hash": "54e0dd7b31ebfcd920191b98b1827965e473d8f9"
+              }
+            }
+          }
+        },
+        "a3500e003b9b": {
+          "text": "`src/server.ts` replaces the SDK's `tools/call` handler so bad arguments reach `commands.ts` and come back with the CLI's error text. A tool registered witho...",
+          "line": 41,
+          "specs": [
+            "src/server.ts:124-132"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/server.ts": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 124,
+                "end": 132,
+                "hash": "2e25ff1b6d3ee0bc53c5bf1c74fb19097ee0e2ca"
+              }
+            }
+          }
+        },
+        "ae6c2f0b3774": {
+          "text": "On the MCP server stdout is the protocol channel; status goes to stderr.",
+          "line": 42,
+          "specs": [
+            "src/mcp.ts:20-27"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/mcp.ts": {
+              "path": "src/mcp.ts",
+              "blob": "820e65ae7c7e6a389903cbb19254a0ae160b78a1",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 20,
+                "end": 27,
+                "hash": "ff3ee8b47540763c29701db25114bbda74649704"
+              }
+            }
+          }
+        },
+        "be9a449a2572": {
+          "text": "The VIC parser needs the AFL Grand Final date in `AFL_GRAND_FINAL`, or a refresh puts Victoria's Friday holiday back to the last Friday in September.",
+          "line": 43,
+          "specs": [
+            "scripts/lib/parse.mjs:359-364",
+            "docs/data.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "scripts/lib/parse.mjs": {
+              "path": "scripts/lib/parse.mjs",
+              "blob": "5ec87c7bc8476dbcf5b2513c791b439f035643ec",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 359,
+                "end": 364,
+                "hash": "0dbd48f55db3edc7798f65336d33aeb6d6f2f04c"
+              }
+            },
+            "docs/data.md": {
+              "path": "docs/data.md",
+              "blob": "6dce6f7509d17526c1db5ceea20bfd82b1215a8e",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "3d4723e43df5": {
+          "text": "The VIC, NT, TAS and SA sites block scripts, so the refresh reports them as blocked; check those from pages saved in a browser with `--pages-dir`.",
+          "line": 44,
+          "specs": [
+            "scripts/refresh-holidays.mjs:21-22",
+            ".github/workflows/refresh-holidays.yml:10-11"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "scripts/refresh-holidays.mjs": {
+              "path": "scripts/refresh-holidays.mjs",
+              "blob": "4972303d7b694b79b7f0e4c8ead535403b28eec2",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 21,
+                "end": 22,
+                "hash": "84ddd49d950fafc08986ac08c1c7e3589e5c1c42"
+              }
+            },
+            ".github/workflows/refresh-holidays.yml": {
+              "path": ".github/workflows/refresh-holidays.yml",
+              "blob": "41e431228c135bd1792c8f343d853eed72efb446",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 10,
+                "end": 11,
+                "hash": "bb9b90f0053ff23af2e6e75a3f7a79625ca7c182"
+              }
+            }
+          }
+        },
+        "70886e0e2eec": {
+          "text": "`AU_BIZDAYS_NOW` (an ISO instant with a zone) and `AU_BIZDAYS_TODAY` (YYYY-MM-DD) fix the clock; tests depend on them.",
+          "line": 45,
+          "specs": [
+            "src/clock.ts:18-42"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/clock.ts": {
+              "path": "src/clock.ts",
+              "blob": "de77d91b80abb6b34e90b33c404f0c96535f31d9",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 18,
+                "end": 42,
+                "hash": "1400eb7d0dde5a288f5833401af8ed18a922058f"
+              }
+            }
+          }
+        }
+      },
+      "pinnedAt": "2026-11-22T08:44:10.769Z",
+      "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f"
+    },
+    "au-bizdays-architecture": {
+      "claims": {
+        "46173c55156d": {
+          "text": "A TypeScript ESM package compiled with tsc to `dist/`, shipping two binaries over one shared core: the `au-bizdays` CLI and the `au-bizdays-mcp` stdio MCP se...",
+          "line": 11,
+          "specs": [
+            "package.json#bin",
+            "package.json#type",
+            "tsconfig.json",
+            "SECURITY.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#bin": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "bin",
+                "hash": "de99ff59469ed74e97caa994d4ce95a76c565387",
+                "value": "{\"au-bizdays\":\"dist/cli.js\",\"au-bizdays-mcp\":\"dist/mcp.js\"}"
+              }
+            },
+            "package.json#type": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "type",
+                "hash": "104552135e0a03cc60690d55ea338c29215ae902",
+                "value": "\"module\""
+              }
+            },
+            "tsconfig.json": {
+              "path": "tsconfig.json",
+              "blob": "a727fd5fb2cb713fc3cb3a01dfd01623f6ba83b2",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "3a78e696769e": {
+          "text": "`src/cli.ts`: argument parser, per-command help, human or `--json` output, exit codes 0, 2 (usage) and 3 (outside the data).",
+          "line": 27,
+          "specs": [
+            "src/cli.ts:23-86",
+            "src/cli.ts:163-194"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/cli.ts": {
+              "path": "src/cli.ts",
+              "blob": "3897957aa6acd88abbb6ca43e7d404e612146692",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 23,
+                "end": 86,
+                "hash": "8c4f67a05c99e76491f7da465ea689569f431d90"
+              }
+            },
+            "src/cli.ts:163-194": {
+              "path": "src/cli.ts",
+              "blob": "3897957aa6acd88abbb6ca43e7d404e612146692",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 163,
+                "end": 194,
+                "hash": "b5da583a7270ea2ee33c8ffb6af550a127893a6f"
+              }
+            }
+          }
+        },
+        "f6a7b38a06cf": {
+          "text": "`src/mcp.ts` and `src/server.ts`: the MCP entry point on stdio and the eight tools, all annotated read-only, each returning the command's JSON as structured ...",
+          "line": 28,
+          "specs": [
+            "src/mcp.ts",
+            "src/server.ts:13",
+            "src/server.ts:39-58"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/mcp.ts": {
+              "path": "src/mcp.ts",
+              "blob": "820e65ae7c7e6a389903cbb19254a0ae160b78a1",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "src/server.ts": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 13,
+                "end": 13,
+                "hash": "5d6943209cf7bb0c628adf6c168b76e46ab31c3b"
+              }
+            },
+            "src/server.ts:39-58": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 39,
+                "end": 58,
+                "hash": "a8bd49d1294e2602f8c72fd46941e7d7d91799e5"
+              }
+            }
+          }
+        },
+        "638f7e68def3": {
+          "text": "`src/commands.ts`: the eight operations shared by both front ends. Each validates loosely typed arguments and returns an `au-bizdays/v1` envelope (input, res...",
+          "line": 29,
+          "specs": [
+            "src/commands.ts:1-42"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/commands.ts": {
+              "path": "src/commands.ts",
+              "blob": "8b6b593beac35bb89ba7260335e5ebf5b67546a6",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 1,
+                "end": 42,
+                "hash": "122fe50bb0977b635d87fa20933467c97f16eaa7"
+              }
+            }
+          }
+        },
+        "02923de00403": {
+          "text": "`src/calendar.ts`: pure business-day arithmetic over a calendar built from one state's data, and the `UsageError` and `CoverageError` types.",
+          "line": 30,
+          "specs": [
+            "src/calendar.ts:1-60"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/calendar.ts": {
+              "path": "src/calendar.ts",
+              "blob": "b353e2c1edbab615badc6c20bda601efc1233f35",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 1,
+                "end": 60,
+                "hash": "d6133ca9c18d0b4f3cab9a9e9252d8d0299565ba"
+              }
+            }
+          }
+        },
+        "bb5365a2aece": {
+          "text": "`src/caveats.ts`: the standing caveats (business-day definition, regional holidays not counted) and the ones a result earns (estimated and part-day holidays ...",
+          "line": 31,
+          "specs": [
+            "src/caveats.ts"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/caveats.ts": {
+              "path": "src/caveats.ts",
+              "blob": "3eebdb55bca1f8e5c8d00efa84808e109dc1f167",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "6ed6f3c75ae7": {
+          "text": "`src/date.ts` and `src/clock.ts`: calendar dates as day numbers, and the clock for `today`, read on the state capital's timezone.",
+          "line": 32,
+          "specs": [
+            "src/date.ts:1-2",
+            "src/clock.ts"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/date.ts": {
+              "path": "src/date.ts",
+              "blob": "a3340cd1e8753924bd2d07140b94f1d6d280bab1",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 1,
+                "end": 2,
+                "hash": "93e2b99917818a4146c05d63f804e64da5686eeb"
+              }
+            },
+            "src/clock.ts": {
+              "path": "src/clock.ts",
+              "blob": "de77d91b80abb6b34e90b33c404f0c96535f31d9",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "f823721a6c02": {
+          "text": "`src/render.ts`: the human text and the MCP one-liner for an envelope.",
+          "line": 33,
+          "specs": [
+            "src/render.ts"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/render.ts": {
+              "path": "src/render.ts",
+              "blob": "d0e5857d4ff94aae0e5628812c4e4e8d11b8f414",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "b43e3a317b0b": {
+          "text": "`src/index.ts`: the library exports (`dist/index.js` is `main`).",
+          "line": 34,
+          "specs": [
+            "src/index.ts",
+            "package.json#main"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/index.ts": {
+              "path": "src/index.ts",
+              "blob": "87629f79390c0d98b0e06f0d207198740f60c98c",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "package.json#main": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "main",
+                "hash": "500912a378c5550923e686a9715eacbeb7bc8d10",
+                "value": "\"./dist/index.js\""
+              }
+            }
+          }
+        },
+        "30decefd4b57": {
+          "text": "`scripts/refresh-holidays.mjs` with parsers in `scripts/lib/parse.mjs`: fetch each state page, parse it to the data shape, diff against `data/`, optionally w...",
+          "line": 35,
+          "specs": [
+            "scripts/refresh-holidays.mjs:1-19",
+            "package.json#files",
+            "SECURITY.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "scripts/refresh-holidays.mjs": {
+              "path": "scripts/refresh-holidays.mjs",
+              "blob": "4972303d7b694b79b7f0e4c8ead535403b28eec2",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 1,
+                "end": 19,
+                "hash": "9597cddf7126db88b9acec3440746ca11171d739"
+              }
+            },
+            "package.json#files": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "files",
+                "hash": "26d683dec6a175337fd6cad85a010620968af73f",
+                "value": "[\"dist\",\"data\",\"server.json\",\"README.md\",\"LICENSE\"]"
+              }
+            },
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "3f624c2718f2": {
+          "text": "`scripts/release.mjs`: plans and writes release notes for the publish workflow. `scripts/render-demo.mjs`: regenerates the output blocks in the README and do...",
+          "line": 36,
+          "specs": [
+            "scripts/release.mjs:1-13",
+            "scripts/render-demo.mjs:1-6",
+            "scripts/check-text.mjs"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "scripts/release.mjs": {
+              "path": "scripts/release.mjs",
+              "blob": "2f62559ef0073ba12e00326a4873b39ef0df0b0b",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 1,
+                "end": 13,
+                "hash": "e247f983ca92565f55f3c4bfd8d9b07e5adf97f9"
+              }
+            },
+            "scripts/render-demo.mjs": {
+              "path": "scripts/render-demo.mjs",
+              "blob": "e453ce3228f98736ff15b293ed43d3c85675411d",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 1,
+                "end": 6,
+                "hash": "c64b9777809028a1a876a8e8d44edbc8babc7dab"
+              }
+            },
+            "scripts/check-text.mjs": {
+              "path": "scripts/check-text.mjs",
+              "blob": "3143c1f45bf854b71766130e5839500f64661770",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "d61605bfe360": {
+          "text": "A CLI call is parsed in `src/cli.ts`, checked against the command's allowed options, then run as a command with a `Context` holding today's date and a `today...",
+          "line": 40,
+          "specs": [
+            "src/cli.ts:163-180"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/cli.ts": {
+              "path": "src/cli.ts",
+              "blob": "3897957aa6acd88abbb6ca43e7d404e612146692",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 163,
+                "end": 180,
+                "hash": "e9851508c844689caedc39ce37ccb294f2c231bf"
+              }
+            }
+          }
+        },
+        "47dd26369e7d": {
+          "text": "An MCP `tools/call` goes to a custom handler in `src/server.ts` (not the SDK's argument check), so the arguments reach the same command function and errors r...",
+          "line": 41,
+          "specs": [
+            "src/server.ts:39-58",
+            "src/server.ts:124-132"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/server.ts": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 39,
+                "end": 58,
+                "hash": "a8bd49d1294e2602f8c72fd46941e7d7d91799e5"
+              }
+            },
+            "src/server.ts:124-132": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 124,
+                "end": 132,
+                "hash": "2e25ff1b6d3ee0bc53c5bf1c74fb19097ee0e2ca"
+              }
+            }
+          }
+        },
+        "c960089fd2c6": {
+          "text": "The command parses the state, dates (`today` resolved on the state's clock), numbers and choices, loads and caches the state's calendar, runs the arithmetic,...",
+          "line": 42,
+          "specs": [
+            "src/commands.ts:44-130"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/commands.ts": {
+              "path": "src/commands.ts",
+              "blob": "8b6b593beac35bb89ba7260335e5ebf5b67546a6",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 44,
+                "end": 130,
+                "hash": "45b5609002314b859069ffcdf551105374d1a528"
+              }
+            }
+          }
+        },
+        "64e23c144fe1": {
+          "text": "A date outside the bundled years raises `CoverageError` and no answer is given.",
+          "line": 43,
+          "specs": [
+            "src/calendar.ts:50-60"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/calendar.ts": {
+              "path": "src/calendar.ts",
+              "blob": "b353e2c1edbab615badc6c20bda601efc1233f35",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 50,
+                "end": 60,
+                "hash": "d466d10938025db4017918fddaf43c56cc7402c3"
+              }
+            }
+          }
+        },
+        "7939213bf07e": {
+          "text": "Monthly, the `refresh-holidays` workflow runs the refresh script with `--write --allow-blocked` and opens a pull request when `data/` changed; it never pushe...",
+          "line": 44,
+          "specs": [
+            ".github/workflows/refresh-holidays.yml"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/workflows/refresh-holidays.yml": {
+              "path": ".github/workflows/refresh-holidays.yml",
+              "blob": "41e431228c135bd1792c8f343d853eed72efb446",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "b4d13435d2e3": {
+          "text": "A push to main that changes package.json (or a manual run) starts `publish`, which publishes to npm with provenance and cuts a GitHub Release when npm lacks ...",
+          "line": 45,
+          "specs": [
+            ".github/workflows/publish.yml",
+            "scripts/release.mjs:7-12"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/workflows/publish.yml": {
+              "path": ".github/workflows/publish.yml",
+              "blob": "907590a42e6e929a635a6203ac69c0b63a17e2cf",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            },
+            "scripts/release.mjs": {
+              "path": "scripts/release.mjs",
+              "blob": "2f62559ef0073ba12e00326a4873b39ef0df0b0b",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 7,
+                "end": 12,
+                "hash": "0fea104de8e2c159f1a79d63f59d4129e3f56000"
+              }
+            }
+          }
+        },
+        "009bda56cd21": {
+          "text": "`data/<state>/<year>.json`, 2025 to 2028 for each of the eight states: `source_url`, `retrieved_on`, optional `estimate_basis`, and holidays with date, name,...",
+          "line": 49,
+          "specs": [
+            "src/data.ts:7-71",
+            "docs/data.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/data.ts": {
+              "path": "src/data.ts",
+              "blob": "8007599771f40b0607229bbcfdadb0ae3702c9b7",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 7,
+                "end": 71,
+                "hash": "1c5fb04e122b1f374f42743ec3c9cc64e1c0775c"
+              }
+            },
+            "docs/data.md": {
+              "path": "docs/data.md",
+              "blob": "6dce6f7509d17526c1db5ceea20bfd82b1215a8e",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "3de5c0a03f33": {
+          "text": "Parsed calendars are cached in memory per process. Nothing is written at run time.",
+          "line": 50,
+          "specs": [
+            "src/data.ts:38",
+            "src/commands.ts:90-98",
+            "SECURITY.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/data.ts": {
+              "path": "src/data.ts",
+              "blob": "8007599771f40b0607229bbcfdadb0ae3702c9b7",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 38,
+                "end": 38,
+                "hash": "de113ac8eba3992764bdd39ad0a8a292f40b4a08"
+              }
+            },
+            "src/commands.ts": {
+              "path": "src/commands.ts",
+              "blob": "8b6b593beac35bb89ba7260335e5ebf5b67546a6",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 90,
+                "end": 98,
+                "hash": "8f916c5af38dc836b813dc01b464a1865afe1cc3"
+              }
+            },
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "68538d4f8950": {
+          "text": "None at run time: the CLI and the MCP server are local processes with no accounts. The refresh workflow's token can open pull requests and cannot push to the...",
+          "line": 54,
+          "specs": [
+            "src/mcp.ts",
+            "SECURITY.md",
+            ".github/workflows/refresh-holidays.yml"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/mcp.ts": {
+              "path": "src/mcp.ts",
+              "blob": "820e65ae7c7e6a389903cbb19254a0ae160b78a1",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            },
+            ".github/workflows/refresh-holidays.yml": {
+              "path": ".github/workflows/refresh-holidays.yml",
+              "blob": "41e431228c135bd1792c8f343d853eed72efb446",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "89ce75b36f42": {
+          "text": "None at run time.",
+          "line": 58,
+          "specs": [
+            "SECURITY.md",
+            "src/data.ts"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            },
+            "src/data.ts": {
+              "path": "src/data.ts",
+              "blob": "8007599771f40b0607229bbcfdadb0ae3702c9b7",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            }
+          }
+        },
+        "1eccd09c6658": {
+          "text": "The refresh script fetches the state government pages and the data.gov.au holiday CSV listed in `SOURCES`, with a 30 second timeout and a User-Agent naming t...",
+          "line": 59,
+          "specs": [
+            "scripts/refresh-holidays.mjs:35-58"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "scripts/refresh-holidays.mjs": {
+              "path": "scripts/refresh-holidays.mjs",
+              "blob": "4972303d7b694b79b7f0e4c8ead535403b28eec2",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 35,
+                "end": 58,
+                "hash": "cc6f7679ec9e1bede437c2dfdb60032c50979583"
+              }
+            }
+          }
+        },
+        "83468662fab5": {
+          "text": "The publish workflow talks to the npm registry (`NPM_TOKEN` secret, or npm trusted publishing over OIDC) and GitHub Releases through `gh` with the workflow t...",
+          "line": 60,
+          "specs": [
+            ".github/workflows/publish.yml:7-14",
+            ".github/workflows/publish.yml:62-80"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/workflows/publish.yml": {
+              "path": ".github/workflows/publish.yml",
+              "blob": "907590a42e6e929a635a6203ac69c0b63a17e2cf",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 7,
+                "end": 14,
+                "hash": "3269cc08896f4305c3f32fc9d067666dc7458011"
+              }
+            },
+            ".github/workflows/publish.yml:62-80": {
+              "path": ".github/workflows/publish.yml",
+              "blob": "907590a42e6e929a635a6203ac69c0b63a17e2cf",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 62,
+                "end": 80,
+                "hash": "265a6e2386d07f9d8efd9288844e4b4a7888868d"
+              }
+            }
+          }
+        }
+      },
+      "pinnedAt": "2026-11-22T08:44:10.778Z",
+      "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f"
+    },
+    "au-bizdays-brand": {
+      "claims": {
+        "2434ca293c2f": {
+          "text": "`au-bizdays`, all lower case with a hyphen, in the README title, the package name, both binaries (`au-bizdays`, `au-bizdays-mcp`) and the social preview.",
+          "line": 16,
+          "specs": [
+            "README.md",
+            "package.json#name",
+            "package.json#bin",
+            ".github/social-preview.png"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "README.md": {
+              "path": "README.md",
+              "blob": "cbec89a17a4d84ad32411e3c870768164b635b73",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            },
+            "package.json#name": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "name",
+                "hash": "a5d455934dbd581db48b2426e6ded14b2a88edcf",
+                "value": "\"au-bizdays\""
+              }
+            },
+            "package.json#bin": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "bin",
+                "hash": "de99ff59469ed74e97caa994d4ce95a76c565387",
+                "value": "{\"au-bizdays\":\"dist/cli.js\",\"au-bizdays-mcp\":\"dist/mcp.js\"}"
+              }
+            },
+            ".github/social-preview.png": {
+              "path": ".github/social-preview.png",
+              "blob": "5122d1a3108d27d00146c35e1deae2bc43296bc2",
+              "commit": "cd10c6f94b2f14ef7e1230705deb9b5214c199b4"
+            }
+          }
+        },
+        "28abaa1eec4d": {
+          "text": "The MCP Registry title is \"AU Business Days\" and the registry name is `io.github.kd-011/au-bizdays`.",
+          "line": 17,
+          "specs": [
+            "server.json"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "server.json": {
+              "path": "server.json",
+              "blob": "d5935ed992b68aacbc23c6d30f6baa7ca3f3d3a9",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "6b9906e24b85": {
+          "text": "State codes are written upper case (ACT, NSW, NT, QLD, SA, TAS, VIC, WA).",
+          "line": 18,
+          "specs": [
+            "src/data.ts:5",
+            "docs/commands.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/data.ts": {
+              "path": "src/data.ts",
+              "blob": "8007599771f40b0607229bbcfdadb0ae3702c9b7",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 5,
+                "end": 5,
+                "hash": "33863481dfc2e581f747083a610dc2065544dff3"
+              }
+            },
+            "docs/commands.md": {
+              "path": "docs/commands.md",
+              "blob": "f58f09f31d55f9d7027ff61ce71cf6ac34b4681a",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "58a92f576d79": {
+          "text": "README opening: \"Business-day and deadline maths for Australian states and territories, as a command line tool and an MCP server. Notice periods, payment ter...",
+          "line": 41,
+          "specs": [
+            "README.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "README.md": {
+              "path": "README.md",
+              "blob": "cbec89a17a4d84ad32411e3c870768164b635b73",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "380526b7e713": {
+          "text": "Package description: \"Business-day and deadline arithmetic for Australian states and territories, with per-state public holidays. A CLI and a read-only MCP s...",
+          "line": 42,
+          "specs": [
+            "package.json#description"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#description": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "description",
+                "hash": "109c1dce965810934ded8d84e118afb174367d63",
+                "value": "\"Business-day and deadline arithmetic for Australian states and territories, with per-state public holidays. A CLI an..."
+              }
+            }
+          }
+        },
+        "1050f9a32e6a": {
+          "text": "Registry description: \"Business-day and deadline maths for Australian states, with per-state public holidays.\"",
+          "line": 43,
+          "specs": [
+            "server.json"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "server.json": {
+              "path": "server.json",
+              "blob": "d5935ed992b68aacbc23c6d30f6baa7ca3f3d3a9",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "4e98015d10ea": {
+          "text": "Social preview text: \"Business days and deadlines for every Australian state.\"",
+          "line": 44,
+          "specs": [
+            ".github/social-preview.png"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/social-preview.png": {
+              "path": ".github/social-preview.png",
+              "blob": "5122d1a3108d27d00146c35e1deae2bc43296bc2",
+              "commit": "cd10c6f94b2f14ef7e1230705deb9b5214c199b4"
+            }
+          }
+        },
+        "e4809893e5ca": {
+          "text": "Call to action: the README's \"Try it\" section, one `npx github:kd-011/au-bizdays ...` line.",
+          "line": 45,
+          "specs": [
+            "README.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "README.md": {
+              "path": "README.md",
+              "blob": "cbec89a17a4d84ad32411e3c870768164b635b73",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "5792a7a1c0bf": {
+          "text": "Footer on every human answer: \"Business day = Monday to Friday, excluding WA statewide public holidays. Not legal advice; your contract or the law may differ.\"",
+          "line": 46,
+          "specs": [
+            "src/render.ts:12-13"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/render.ts": {
+              "path": "src/render.ts",
+              "blob": "d0e5857d4ff94aae0e5628812c4e4e8d11b8f414",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 12,
+                "end": 13,
+                "hash": "b491379bd865d05c6a92bcacb0b079b1fb1be388"
+              }
+            }
+          }
+        },
+        "80e9406081e6": {
+          "text": "Refusal tone, outside the data: \"The answer would depend on holidays that are not in the data, so none is given.\"",
+          "line": 47,
+          "specs": [
+            "src/calendar.ts:55-56"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/calendar.ts": {
+              "path": "src/calendar.ts",
+              "blob": "b353e2c1edbab615badc6c20bda601efc1233f35",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2",
+              "range": {
+                "start": 55,
+                "end": 56,
+                "hash": "cf241e2cefcff903b1d37677b2aaa04c6a6d8c4e"
+              }
+            }
+          }
+        },
+        "6e8b575090d4": {
+          "text": "Usage errors name the fix: \"A state is required: one of ACT, NSW, NT, QLD, SA, TAS, VIC, WA.\" and \"Unknown command ... Run au-bizdays --help.\"",
+          "line": 48,
+          "specs": [
+            "src/commands.ts:44-49",
+            "src/cli.ts:173"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/commands.ts": {
+              "path": "src/commands.ts",
+              "blob": "8b6b593beac35bb89ba7260335e5ebf5b67546a6",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35",
+              "range": {
+                "start": 44,
+                "end": 49,
+                "hash": "2e9d82f80ff24d01dfb6d9292d297c630decd392"
+              }
+            },
+            "src/cli.ts": {
+              "path": "src/cli.ts",
+              "blob": "3897957aa6acd88abbb6ca43e7d404e612146692",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 173,
+                "end": 173,
+                "hash": "0cfbb86936dd1d75712f8390d0f07f98bd0b80a7"
+              }
+            }
+          }
+        },
+        "ad8dfce4163e": {
+          "text": "Unexpected MCP errors: \"Unexpected error. Nothing was changed; this server only reads its bundled data.\"",
+          "line": 49,
+          "specs": [
+            "src/server.ts:48"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "src/server.ts": {
+              "path": "src/server.ts",
+              "blob": "6909cad680e2ce511abd2e1d439c70555d4580a1",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "range": {
+                "start": 48,
+                "end": 48,
+                "hash": "1ed10976767b16a223e9567bd727f0384d6e83ab"
+              }
+            }
+          }
+        },
+        "6ce73b16297a": {
+          "text": "Writing rules for contributors: \"Write plain English. No em dashes, no marketing words.\"",
+          "line": 50,
+          "specs": [
+            "CONTRIBUTING.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "CONTRIBUTING.md": {
+              "path": "CONTRIBUTING.md",
+              "blob": "506b31aff7af566c3d12f8fb89bbb5f717aacb3b",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            }
+          }
+        },
+        "52d67dbc06b6": {
+          "text": "Social preview image (GitHub's OG card): `.github/social-preview.png`.",
+          "line": 54,
+          "specs": [
+            ".github/social-preview.png"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/social-preview.png": {
+              "path": ".github/social-preview.png",
+              "blob": "5122d1a3108d27d00146c35e1deae2bc43296bc2",
+              "commit": "cd10c6f94b2f14ef7e1230705deb9b5214c199b4"
+            }
+          }
+        },
+        "ede6f6904682": {
+          "text": "No logo or favicon: the project has no website.",
+          "line": 55,
+          "specs": [
+            "package.json#homepage"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "package.json#homepage": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "homepage",
+                "hash": "976aa59eebf3178a719b70726d834c321fe0ae12",
+                "value": "\"https://github.com/kd-011/au-bizdays#readme\""
+              }
+            }
+          }
+        },
+        "9773e6854c0a": {
+          "text": "MIT licence, copyright 2026 kd-011.",
+          "line": 59,
+          "specs": [
+            "LICENSE",
+            "README.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "LICENSE": {
+              "path": "LICENSE",
+              "blob": "017a3dc11f5bd2f877b6dd3a9cb87eeadd26d5d8",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            "README.md": {
+              "path": "README.md",
+              "blob": "cbec89a17a4d84ad32411e3c870768164b635b73",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f"
+            }
+          }
+        },
+        "299fec78904b": {
+          "text": "Bugs, feature requests and wrong holidays go through GitHub issue templates; blank issues are off.",
+          "line": 60,
+          "specs": [
+            ".github/ISSUE_TEMPLATE/config.yml",
+            ".github/ISSUE_TEMPLATE/wrong-holiday.yml"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            ".github/ISSUE_TEMPLATE/config.yml": {
+              "path": ".github/ISSUE_TEMPLATE/config.yml",
+              "blob": "3ba13e0cec6cbbfd462e9ebf529dd2093148cd69",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            },
+            ".github/ISSUE_TEMPLATE/wrong-holiday.yml": {
+              "path": ".github/ISSUE_TEMPLATE/wrong-holiday.yml",
+              "blob": "de071bce744b285889f133c12f6adf104a1777b8",
+              "commit": "60274ab98a1ccb48454d3c8ea51836a071e394d2"
+            }
+          }
+        },
+        "f41ed4650d48": {
+          "text": "Security problems go to GitHub private vulnerability reporting, not a public issue.",
+          "line": 61,
+          "specs": [
+            "SECURITY.md"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            }
+          }
+        },
+        "33e02167ab40": {
+          "text": "No privacy or terms pages: there is no website and the tool collects nothing. No email contact is published.",
+          "line": 62,
+          "specs": [
+            "SECURITY.md",
+            "package.json#bugs"
+          ],
+          "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f",
+          "files": {
+            "SECURITY.md": {
+              "path": "SECURITY.md",
+              "blob": "110f34afa2732ae41d542d73e0f83a6e46197a90",
+              "commit": "31d699ac8448d718e1252fffe9d57395aed83d35"
+            },
+            "package.json#bugs": {
+              "path": "package.json",
+              "blob": "79d7e842eeae5f3446bceb5a070d94237a4cc3c7",
+              "commit": "4a3a4fb2942ccfb7c228b1cc08e8e2fc0b8f219f",
+              "jsonKey": {
+                "key": "bugs",
+                "hash": "00a73f4bb74a2a6bb4f66f208121c94a4ec51f39",
+                "value": "{\"url\":\"https://github.com/kd-011/au-bizdays/issues\"}"
+              }
+            }
+          }
+        }
+      },
+      "pinnedAt": "2026-11-22T08:44:10.786Z",
+      "head": "2523a75b914ee674cc37a7261d6dd227d52fa83f"
+    }
+  }
+}
