@@ -34,7 +34,7 @@ The doc index is docs/README.md. Read docs/ARCHITECTURE.md before changing struc
 
 ## Traps
 
-- The repo is public. A test fails on an em dash or a local home path (`/home/` or `/Users/`) in any tracked text file, docs included: write `~/` paths and placeholders. <!-- src: test/readme.test.mjs:93-102 -->
+- The repo is public. A test fails on an em dash or an absolute home directory path (Linux or macOS style) in any tracked text file, docs included: write `~/` paths and placeholders. <!-- src: test/readme.test.mjs:93-102 -->
 - The demo blocks in README.md and docs/commands.md are generated and a test fails when they go stale. After any change to command output or data, run `npm run assets` and commit the result. <!-- src: test/readme.test.mjs:12-18, scripts/render-demo.mjs:1-6 -->
 - A test fails unless the docs mention every MCP tool name and every JSON result field in backticks, and another rejects novelty claims ("first", "only", "unique" near "tool" or "server") in README.md and docs. <!-- src: test/readme.test.mjs:53-80 -->
 - Tests run the built `dist/`, so a test run on stale output tests old code. `npm test` rebuilds; a bare `node --test` does not. <!-- src: package.json#scripts.pretest, test/helpers.mjs:9-14 -->
